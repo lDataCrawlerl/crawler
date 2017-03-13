@@ -2,8 +2,9 @@
 
 from django.contrib import admin
 from .models import DoubanSubject
+from common.admin import CreatedUpdatedAdmin
 
 
 @admin.register(DoubanSubject)
-class DoubanSubjectAdmin(admin.ModelAdmin):
+class DoubanSubjectAdmin(CreatedUpdatedAdmin):
     pass
