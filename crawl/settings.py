@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Django settings for crawl project.
 
@@ -15,7 +16,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -27,10 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,32 +70,52 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'crawl.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'crawl',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+        'PORT': 3306
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
 
+DATETIME_FORMAT = 'Y-m-d H:i:s'
 
+DATE_FORMAT = 'Y-m-d'
+
+# suit config
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Crawl管理平台',
+    'LIST_PER_PAGE': 20,
+    'MENU': (
+        'sites',
+        # {
+        #     'label': u'用户管理',
+        #     'app': 'web_sso',
+        #     'models': ('web_sso.MyUser', 'auth.Group', 'web_sso.User_ex')
+        # },
+    ),
+    # label表示name，app表示上边的install的app，models表示用了哪些models
+}
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
