@@ -5,7 +5,6 @@ from django.db import models
 
 
 class DoubanSubject(Base):
-    url = models.CharField(max_length=200, default='')
     image_url = models.CharField(max_length=300, default='')
     directors = models.CharField(max_length=300, default='')
     actors = models.CharField(max_length=300, default='')
