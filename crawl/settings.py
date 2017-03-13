@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,11 +109,11 @@ SUIT_CONFIG = {
     'LIST_PER_PAGE': 20,
     'MENU': (
         'sites',
-        # {
-        #     'label': u'用户管理',
-        #     'app': 'web_sso',
-        #     'models': ('web_sso.MyUser', 'auth.Group', 'web_sso.User_ex')
-        # },
+        {
+            'label': u'核心管理',
+            'app': 'core',
+            # 'models': ('core.TracebackLog', )
+        },
     ),
     # label表示name，app表示上边的install的app，models表示用了哪些models
 }
