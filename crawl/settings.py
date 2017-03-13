@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'core',
+    'projects'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -114,6 +115,10 @@ SUIT_CONFIG = {
             'app': 'core',
             # 'models': ('core.TracebackLog', )
         },
+        {
+            'label': u'爬虫数据',
+            'app': 'projects',
+        }
     ),
     # label表示name，app表示上边的install的app，models表示用了哪些models
 }
