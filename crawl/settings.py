@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import djcelery
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,6 +26,7 @@ SECRET_KEY = '=62qmxk#3kb8lmb#pidpq3=(cu69nxp*mrfexda0j1&0)#_0iy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+djcelery.setup_loader()
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django_celery_results',
+    'djcelery',
     'core',
     'projects'
 )
@@ -86,6 +91,14 @@ DATABASES = {
     }
 }
 
+BROKER_URL = 'redis://localhost:6379'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -113,7 +126,12 @@ SUIT_CONFIG = {
         {
             'label': u'核心管理',
             'app': 'core',
-            # 'models': ('core.TracebackLog', )
+            'models': (
+                'core.TracebackLog', 'django_celery_results.TaskResult',
+                'djcelery.CrontabSchedule', 'djcelery.IntervalSchedule',
+                'djcelery.PeriodicTask', 'djcelery.PeriodicTasks',
+                'djcelery.TaskState', 'djcelery.WorkerState'
+            )
         },
         {
             'label': u'爬虫数据',
